@@ -8,7 +8,7 @@ const validation = (Schema) => {
             if (Schema[key]) {
                 const validationResult = Schema[key].validate(req[key], { abortEarly: false });
                 if (validationResult.error) {
-                    validationArry.push(validationResult.error.details)
+                    validationArray.push(validationResult.error.details)
                 }
             }
         });

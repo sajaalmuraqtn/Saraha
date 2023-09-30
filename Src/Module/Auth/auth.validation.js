@@ -7,6 +7,7 @@ body:joi.object( {userName:joi.string().required().min(3).max(20),
             "string.min":"password must be at least 8 char"
         }),
         cPassword:joi.valid(joi.ref('password')).required(),
+        gender:joi.string().valid('Male','Female'),
         age:joi.number().integer().min(18).max(90)
 })}
 export const signInSchema = joi.object({

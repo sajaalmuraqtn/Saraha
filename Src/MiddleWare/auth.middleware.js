@@ -1,8 +1,9 @@
 import jwt from "jsonwebtoken"
 import UserModel from "../../Connection/Models/User.model.js";
+import { asyncHandler } from "./errorHandling.middleware.js";
 
-export const auth =async (req, res, next) => {
-    try {
+export const auth = asyncHandler (async (req, res, next) => {
+  
         const Authorization= req.headers.authorization;
         if (!Authorization?.startsWith(process.env.BEARER)) {       
           return res.json({ error: 'invalid Authorization' });
@@ -17,10 +18,8 @@ export const auth =async (req, res, next) => {
             return res.json({ error: 'not register account'});
         }
         req.userId=decoded.userId;
-        next()
-      
-    } catch (error) {
-        return res.json({ error: error.stack });
-    }
+         next()
+    
 
 }
+)
