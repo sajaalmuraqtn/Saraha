@@ -8,7 +8,7 @@ export const getUsers=(req,res)=>{
 
 export const profile=async(req,res)=>{
 
-        const user =await UserModel.findOne({_id:req.userId})
+        const user =await UserModel.findOne({_id:req.user._id})
         return res.json({user:user});
   
 }
