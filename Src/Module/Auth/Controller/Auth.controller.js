@@ -59,8 +59,6 @@ export const signUp=async(req,res)=>{
       const html=`<a href='${link}'>verify Email </a>`;
       sendEmail(decoded.email,"confirm Email",html);
 
-         return  res.json({message:'your email sent successfully'}) 
-      
-
- 
+         return  res.json({message:'your email sent successfully'}) ;
+   
    }

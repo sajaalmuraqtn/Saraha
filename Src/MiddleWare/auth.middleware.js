@@ -17,9 +17,8 @@ export const auth = asyncHandler (async (req, res, next) => {
         if (!authUser) {
             return res.json({ error: 'not register account'});
         }
-        req.userId=decoded.userId;
-         next()
-    
+        req.user=authUser;
+        next()
 
 }
 )
