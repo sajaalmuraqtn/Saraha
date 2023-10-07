@@ -27,6 +27,9 @@ const userSchema=new Schema(
         confirmEmail:{
             type:Boolean,
             default:false
+        },
+        profilePic:{
+            type:String
         }
     },{
         timestamps:true
