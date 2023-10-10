@@ -1,7 +1,7 @@
 import multer from "multer";
 import { nanoid } from 'nanoid'
 
- function fileUpload(){
+ function  fileUpload (){
     
     const storage=multer.diskStorage({ });
 
@@ -10,6 +10,7 @@ import { nanoid } from 'nanoid'
             cb(null,true);
         } else {
             cb('invalid format',false);
+            
         }
     }
    const upload=multer({fileFilter:fileFilter,storage:storage});

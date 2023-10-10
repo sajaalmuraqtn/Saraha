@@ -6,3 +6,12 @@ return (req,res,next)=>{
 }
 
 }
+
+export const globalError=(err,req,res,next)=>{
+    if (err.message) {      
+        return res.json({message:err.message});
+    }
+    else{
+        return res.json({message:'global error'});
+    }
+}

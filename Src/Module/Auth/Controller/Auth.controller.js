@@ -3,12 +3,13 @@ import UserModel from "../../../../Connection/Models/User.model.js";
 import  jwt  from 'jsonwebtoken';
 import sendEmail from '../../../Services/SendEmail.js';
 
-export const signUp=async(req,res)=>{
+export const signUp=async(req,res,next)=>{
     
       const {userName,email,password,age,gender}=req.body
       const user= await UserModel.findOne({email:email});
        if (user) {
-          return res.status(210).json({error:'email exist'});
+         //  return res.status(210).json({error:'email exist'});
+          return next(new Error('email exist'));
       } 
          const hashedPassword= bcrypt.hashSync(password,parseInt(process.env.SALTROUND))
          const createUser=await UserModel.create({userName,email,password:hashedPassword,age,gender});
@@ -25,22 +26,27 @@ export const signUp=async(req,res)=>{
          return res.json({messages:'success',createUser});
     
    }
-   export const signIn=async(req,res)=>{
+   export const signIn=async(req,res,next)=>{
   
          const {email,password}=req.body;
          const user=await UserModel.findOne({email:email});
          if(!user){
-            return res.json({error:'email invalid'});       
+            // return res.json({error:'email invalid'});       
+            return next(new Error('email invalid'));       
+
          }
          if (!user.confirmEmail) {
-            return res.json({message :'please confirm your email'});
+            // return res.json({message :'please confirm your email'});
+            return next(new Error('please confirm your email'));       
+
          }
          const isMach=await bcrypt.compareSync(password,user.password);
          if (!isMach) {
-            return res.json({error:'data invalid'});       
+            // return res.json({error:'data invalid'});       
+             return next(new Error('data invalid'));       
          }
          const token=await jwt.sign({userId:user._id,userName:user.userName},process.env.tokenPass);
-         return res.json({messages:'success',token});
+         return res.json({message:'success',token});
    }
    export const confirmEmail=async(req,res,next)=>{
       let {token}=req.params;
