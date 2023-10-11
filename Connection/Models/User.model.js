@@ -29,7 +29,7 @@ const userSchema=new Schema(
             default:false
         },
         profilePic:{
-            type:String
+            type:Object
         }
     },{
         timestamps:true
