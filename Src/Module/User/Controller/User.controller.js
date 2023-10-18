@@ -2,10 +2,9 @@ import bcrypt from 'bcryptjs'
 import UserModel from "../../../../Connection/Models/User.model.js";
 import cloudinary from "../../../Services/cloudinary.js";
 
-export const getUsers=(req,res)=>{
-    
-        return res.json({message:'users success'})
-    
+export const getUsers=async(req,res)=>{
+        let users =await UserModel.find();
+        return res.json({message:'success',users})
 }
 
 export const profile=async(req,res,next)=>{
